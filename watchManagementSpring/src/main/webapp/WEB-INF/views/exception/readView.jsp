@@ -4,11 +4,23 @@
 <html>
 	<head>
 		<!-- 합쳐지고 최소화된 최신 CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-		<!-- 부가적인 테마 -->
+		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		부가적인 테마
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 	 	
-	 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+	 	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
+		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	 	
 	 	<title>당직 예외 설정</title>
 	</head>
@@ -43,7 +55,8 @@
 				
 				location.href = "/exception/list?page=${scri.page}"
 						      +"&perPageNum=${scri.perPageNum}"
-						      +"&searchType=${scri.searchType}&keyword=${scri.keyword}";
+						      +"&searchType=${scri.searchType}&keyword=${scri.keyword}"
+						      +"&searchEType=${scri.searchEType}&eTypeKeyword=${scri.eTypeKeyword}";
 			})
 			
 		})
@@ -67,13 +80,15 @@
 					<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
 					<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
 					<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
+					<input type="hidden" id="searchEType" name="searchEType" value="${scri.searchEType}"> 
+					<input type="hidden" id="eTypeKeyword" name="eTypeKeyword" value="${scri.eTypeKeyword}"> 
 				</form>
 				
 				<div class="form-group">
 					<label for="title" class="col-sm-2 control-label">구분</label>
-					<select id="etype" name="etype" onchange="typeSelect();" disabled>
+					<select id="etype" name="etype" class="form-control" onchange="typeSelect();" disabled>
 						<option value="D"<c:if test="${read.etype == 'D'}"> selected</c:if>>날짜</option>
-						<option value="S"<c:if test="${read.etype == 'S'}"> selected</c:if>>사용자</option>
+						<option value="S"<c:if test="${read.etype == 'U'}"> selected</c:if>>사용자</option>
 					</select>
 				</div>
 				<div class="form-group">
@@ -96,7 +111,7 @@
 				</div>
 				<div class="form-group">
 					<label for="regdate" class="col-sm-2 control-label">작성날짜</label>
-					<fmt:formatDate value="${read.regdate}" pattern="yyyy-MM-dd" />	
+					<fmt:formatDate value="${read.regdate}" pattern="yyyy-MM-dd HH:mm:ss" />	
 				</div>
 				<hr>
 				<div>
@@ -105,7 +120,7 @@
 					<button type="button" class="list_btn btn btn-primary">목록</button>	
 				</div>
 			</section>
-			<hr />
+			<hr>
 		</div>
 	</body>
 </html>

@@ -52,6 +52,7 @@
 		  WHERE 
 		      1=1
 		      <include refid="search"></include>
+		      <include refid="search2"></include>
 		      ORDER BY ENO DESC
 		) list
 		<![CDATA[WHERE ROWNUM >= #{rowStart} AND ROWNUM <= #{rowEnd}]]>
@@ -62,7 +63,8 @@
 		SELECT COUNT(ENO)
 		   FROM MP_EXCEPTION
 		   WHERE 1=1
-		<include refid="search"></include>	
+		<include refid="search"></include>
+		<include refid="search2"></include>	
 		   <![CDATA[AND ENO > 0]]>
 	</select>
 	
@@ -71,7 +73,14 @@
 			<!-- <if test="searchType == 't'.toString()">AND TITLE LIKE '%' #{keyword} '%'</if> -->
 			<if test="searchType == 'c'.toString()">AND CONTENT LIKE '%' #{keyword} '%'</if>
 			<if test="searchType == 'w'.toString()">AND WRITER LIKE '%' #{keyword} '%'</if>
-			<if test="searchType == 'tc'.toString()">AND (TITLE LIKE '%' #{keyword} '%') or (CONTENT LIKE '%' #{keyword} '%')</if>
+			<!-- <if test="searchType == 'type'.toString()">AND ETYPE LIKE '%' #{keyword} '%'</if> -->
+			<!-- <if test="searchType == 'tc'.toString()">AND (TITLE LIKE '%' #{keyword} '%') or (CONTENT LIKE '%' #{keyword} '%')</if> -->
+		</if>
+	</sql>
+	
+	<sql id="search2">
+		<if test="searchEType != null">
+			<if test="searchEType == 'type'.toString()">AND ETYPE LIKE '%' #{eTypeKeyword} '%'</if>
 		</if>
 	</sql>
 	

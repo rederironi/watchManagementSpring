@@ -3,14 +3,21 @@
 <html>
 	<head>
 		<!-- 합쳐지고 최소화된 최신 CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-		<!-- 부가적인 테마 -->
+		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		부가적인 테마
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 	 	
 	 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	 	<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+	 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	 	
 	 	<title>당직 예외 설정</title>
 	</head>
@@ -112,103 +119,75 @@
 			
 		}
 	</script>
-	<body>
-	
-		<div id="root">
-			<header>
-				<h1> 당직 예외 설정</h1>
-			</header>
-			<hr />
-			 
-			<div>
-				<%@include file="nav.jsp" %>
-			</div>
-			<hr />
-			
-			<section id="container">
-				<form name="writeForm" method="post" action="/exception/write">
-					<table>
-						<tbody>
-							<c:if test="${member.userId != null}">
-								<tr>
-									<td>
-										<label for="title">구분</label>
-										<select id="etype" name="etype" onchange="typeSelect();">
+<body>
+	<div class="container">
+	<header>
+		<h1> 당직 예외 설정</h1>
+	</header>
+	<hr />
+	 
+	<div>
+		<%@include file="nav.jsp" %>
+	</div>
+	<hr />
+    
+       <div class="col-sm-12 pt-3">
+       	   <c:if test="${member.userId != null}">
+           <div class="card">
+               <div class="card-header card-header-primary">
+                   <h4 class="card-title"><i class="fas fa-square"></i> 당직 예외 설정</h4>
+                   <p class="card-catagory"></p>
+               </div>
+               <div class="card-body">
+                   <div class="table-responsive">
+                   
+                   	<form name="writeForm" method="post" action="/exception/write">
+                        <table class="table" id="fileIndex">
+                            <tbody>
+	                            <tr style="line-height:32px;">
+	                                <td>구분</td>
+	                                <td colspan="3">
+	                                   <select id="etype" name="etype" onchange="typeSelect();">
 											<option value="D">날짜</option>
 											<option value="U">사용자</option>
 										</select>
-									</td>
-								</tr>	
-								<tr>
-									<td>
-										<label for="선택값">선택값</label>
-										<input type="text" id="edate" name="edate" title="날짜를 입력하세요." value="" maxlength="10" />
+	                                </td>                      
+	                            </tr>
+	                            <tr>
+	                                <td>선택값</td>
+	                                <td colspan="3">
+										<input type="text" id="edate" name="edate" title="날짜를 입력하세요." value="" maxlength="10" autocomplete="off" />
 										<select id="euser" name="euser" style="display:none;">
 										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label for="내용">내용</label>
-										<input type="text" id="content" name="content" class="chk" title="내용을 입력하세요." value="" />
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label for="writer">작성자</label><input type="text" id="writer" name="writer" title="작성자를 입력하세요." disabled value="${member.userId}" />
-									</td>
-								</tr>
-								
-								
-								
-								<%-- <tr>
-									<td>
-										<label for="title">구분</label>
-										<!-- <select id="etype" name="etype" onchange="typeSelect();">
-											<option value="D">날짜</option>
-											<option value="S">사용자</option>
-										</select> -->
-										<input type="text" id="etype" name="etype" title="" value="D" />
-									</td>
-								</tr>	
-								<tr>
-									<td>
-										<label for="선택값">선택값</label>
-										<input type="text" id="edate" name="edate" title="날짜를 입력하세요." value="" />
-										<!-- <select id="euser" name="euser" style="display:none;">
-										</select> -->
-										<input type="text" id="euser" name="euser" title="날짜를 입력하세요." value="" />
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label for="내용">내용</label>
-										<input type="text" id="content" name="content" class="chk" title="내용을 입력하세요." value="" />
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label for="writer">작성자</label><input type="text" id="writer" name="writer" title="작성자를 입력하세요." readonly value="${member.userId}" />
-									</td>
-								</tr> --%>
-								
-								
-								<tr>
-									<td>						
-										<button class="write_btn" type="submit">작성</button>	
-									</td>
-								</tr>	
-							</c:if>
-							<c:if test="${member.userId == null}">
-								<p>로그인 후에 작성하실 수 있습니다.</p>
-							</c:if>
-							
-						</tbody>			
-					</table>
-				</form>
-				
-			</section>
-			<hr />
-		</div>
-	</body>
+	                                </td>
+	                            </tr>  
+	                            <tr>
+	                                <td>내용</td>
+	                                <td colspan="3">
+	                                    <input type="text" id="content" name="content" class="chk" title="내용을 입력하세요." value="" />
+	                                </td>
+	                            </tr>
+	                            <tr>
+	                                <td>작성자</td>
+	                                <td colspan="3">
+	                                    <input type="text" id="writer" name="writer" title="작성자를 입력하세요." readonly="readonly" value="${member.userId}" />
+	                                </td>
+	                            </tr>
+                            </tbody>
+                        </table>
+					</form>          
+                   </div>
+               </div>
+           </div>
+           
+           <div class="text-center mt-3">
+		        <button class="btn btn-success write_btn" type="submit">작성</button>	
+		    </div>
+		    </c:if>
+		    <c:if test="${member.userId == null}">
+					<p>로그인 후에 작성하실 수 있습니다.</p>
+			</c:if>	   
+        </div>
+	</div>
+</body>
 </html>

@@ -97,6 +97,8 @@ public class ExceptionController {
 		rttr.addAttribute("perPageNum", scri.getPerPageNum());
 		rttr.addAttribute("searchType", scri.getSearchType());
 		rttr.addAttribute("keyword", scri.getKeyword());
+		rttr.addAttribute("searchEType", scri.getSearchEType());
+		rttr.addAttribute("eTypeKeyword", scri.geteTypeKeyword());
 
 		return "redirect:/exception/list";
 	}
@@ -112,6 +114,8 @@ public class ExceptionController {
 		rttr.addAttribute("perPageNum", scri.getPerPageNum());
 		rttr.addAttribute("searchType", scri.getSearchType());
 		rttr.addAttribute("keyword", scri.getKeyword());
+		rttr.addAttribute("searchEType", scri.getSearchEType());
+		rttr.addAttribute("eTypeKeyword", scri.geteTypeKeyword());
 		
 		return "redirect:/exception/list";
 	}

@@ -9,12 +9,24 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 		
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
 	 
 	 	<title>당직 예외 설정</title>
 	</head>
-	<style type="text/javascript">
-		
-	</style>
+	<script type="text/javascript">
+		function fn_eTypeSelect(){ 
+			if($("#eTypeSelect option:selected").val() == "D"){
+				self.location = "list" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("#searchType option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val()) + "&searchEType=" + "type" + "&eTypeKeyword=" + $("#eTypeSelect option:selected").val();
+			} else if ($("#eTypeSelect option:selected").val() == "U"){
+				self.location = "list" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("#searchType option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val()) + "&searchEType=" + "type" + "&eTypeKeyword=" + $("#eTypeSelect option:selected").val();
+			} else {
+				self.location = "list" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("#searchType option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val()) + "&searchEType=" + "type" + "&eTypeKeyword=" + $("#eTypeSelect option:selected").val();
+			}
+		}
+	</script>
 	<body>
 		<div class="container">
 			<header>
@@ -26,9 +38,10 @@
 				<%@include file="nav.jsp" %>
 			</div>
 			
-			<select id="etypeSelect">
-				<option value="D">날짜</option>
-				<option value="S">사용자</option>
+			<select id="eTypeSelect" onchange="fn_eTypeSelect();">
+				<option value=""<c:out value="${scri.eTypeKeyword eq '' ? 'selected' : ''}"/>>모두</option>
+				<option value="D"<c:out value="${scri.eTypeKeyword eq 'D' ? 'selected' : ''}"/>>날짜</option>
+				<option value="U"<c:out value="${scri.eTypeKeyword eq 'U' ? 'selected' : ''}"/>>사용자</option>
 			</select>
 			<section id="container">
 				<form role="form" method="get">
@@ -65,12 +78,12 @@
 					</table>
 					<div class="search row">
 						<div class="col-xs-2 col-sm-2">
-							<select name="searchType" class="form-control">
+							<select name="searchType" id="searchType" class="form-control">
 								<option value="n"<c:out value="${scri.searchType == null ? 'selected' : ''}"/>>-----</option>
 								<%-- <option value="t"<c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>제목</option> --%>
 								<option value="c"<c:out value="${scri.searchType eq 'c' ? 'selected' : ''}"/>>내용</option>
 								<option value="w"<c:out value="${scri.searchType eq 'w' ? 'selected' : ''}"/>>작성자</option>
-								<option value="tc"<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>제목+내용</option>
+								<%-- <option value="tc"<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>제목+내용</option> --%>
 							</select>
 						</div>
 						 
@@ -86,7 +99,7 @@
 						<script>
 							 $(function(){
 								 $('#searchBtn').click(function() {
-									 self.location = "list" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val());
+									 self.location = "list" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("#searchType option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val()) + "&searchEType=" + "type" + "&eTypeKeyword=" + $("#eTypeSelect option:selected").val();
 								 });
 							 });   
 						</script>

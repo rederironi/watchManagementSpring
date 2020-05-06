@@ -62,6 +62,7 @@
 	<hr />
     
        <div class="col-sm-12 pt-3">
+       	   <c:if test="${member.userId != null}">
            <div class="card">
                <div class="card-header card-header-primary">
                    <h4 class="card-title"><i class="fas fa-square"></i> 게시판</h4>
@@ -69,7 +70,7 @@
                </div>
                <div class="card-body">
                    <div class="table-responsive">
-                   <c:if test="${member.userId != null}">
+                   
                    	<form name="writeForm" method="post" action="/board/write" enctype="multipart/form-data">
                         <table class="table" id="fileIndex">
                             <tbody>
@@ -93,18 +94,19 @@
 	                            </tr>
                             </tbody>
                         </table>
-                        <div class="text-center mt-3">
-					        <button class="btn btn-success write_btn" type="submit">작성</button>	
-							<button class="btn btn-info fileAdd_btn" type="button">파일추가</button>	
-					    </div>
-					</form>
-				</c:if>
-				<c:if test="${member.userId == null}">
-					<p>로그인 후에 작성하실 수 있습니다.</p>
-				</c:if>	                       
+					</form>          
                    </div>
                </div>
            </div>
+           
+           <div class="text-center mt-3">
+		        <button class="btn btn-success write_btn" type="submit">작성</button>	
+				<button class="btn btn-info fileAdd_btn" type="button">파일추가</button>	
+		    </div>
+		    </c:if>
+		    <c:if test="${member.userId == null}">
+					<p>로그인 후에 작성하실 수 있습니다.</p>
+			</c:if>	   
         </div>
 	</div>
 </body>
