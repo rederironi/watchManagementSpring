@@ -1,11 +1,14 @@
 package kr.co.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
 import kr.co.dao.MemberDAO;
 import kr.co.vo.MemberVO;
+import kr.co.vo.SearchCriteria;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -55,5 +58,12 @@ public class MemberServiceImpl implements MemberService {
 	public int idChk(MemberVO vo) throws Exception {
 		int result = dao.idChk(vo);
 		return result;
+	}
+	
+	// 사용자 리스트
+	@Override
+	public List<MemberVO> list() throws Exception {
+
+		return dao.list();
 	}
 }

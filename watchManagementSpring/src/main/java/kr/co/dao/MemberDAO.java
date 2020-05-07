@@ -1,6 +1,9 @@
 package kr.co.dao;
 
+import java.util.List;
+
 import kr.co.vo.MemberVO;
+import kr.co.vo.SearchCriteria;
 
 public interface MemberDAO {
 	
@@ -21,4 +24,7 @@ public interface MemberDAO {
 	
 	// 아이디 중복체크
 	public int idChk(MemberVO vo) throws Exception;
+	
+	// 사용자 리스트
+	public List<MemberVO> list() throws Exception;
 }

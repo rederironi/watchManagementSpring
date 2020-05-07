@@ -45,9 +45,15 @@
 		  AND USERPASS = #{userPass}
 	</select>
 	
-		<!-- 아이디 중복 체크 -->
+	<!-- 아이디 중복 체크 -->
 	<select id="idChk" resultType="int">
 		SELECT COUNT(*) FROM MP_MEMBER
 		WHERE USERID = #{userId}
+	</select>
+	
+	<!-- 사용자 리스트 -->
+	<select id="listUser" resultType="kr.co.vo.MemberVO">
+		SELECT USERID, USERNAME
+		FROM MP_MEMBER ORDER BY REGDATE ASC
 	</select>
 </mapper>

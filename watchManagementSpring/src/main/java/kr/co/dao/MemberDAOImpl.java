@@ -1,11 +1,15 @@
 package kr.co.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import kr.co.vo.BoardVO;
 import kr.co.vo.MemberVO;
+import kr.co.vo.SearchCriteria;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
@@ -57,5 +61,13 @@ public class MemberDAOImpl implements MemberDAO {
 	public int idChk(MemberVO vo) throws Exception {
 		int result = sql.selectOne("memberMapper.idChk", vo);
 		return result;
+	}
+	
+	// 게시물 목록 조회
+	@Override
+	public List<MemberVO> list() throws Exception {
+	
+		return sql.selectList("memberMapper.listUser");
+
 	}
 }
