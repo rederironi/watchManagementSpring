@@ -84,6 +84,7 @@
 	<h1> 당직 체크 문서</h1>
 	<hr />
        <div class="col-sm-12 pt-3">
+       	   <c:if test="${member.userId != null}">
            <div class="card">
                <div class="card-header card-header-primary">
                    <h4 class="card-title"><i class="fas fa-square"></i> 당직 체크 문서</h4>
@@ -92,7 +93,7 @@
                <div class="card-body">
                    <div class="table-responsive">
                    
-                   	<form name="writeForm" method="post" action="/board/write" enctype="multipart/form-data">
+                   	<form name="updateForm" method="post" action="/board/write" enctype="multipart/form-data">
                    		<input type="hidden" name="bno" value="${update.bno}" readonly="readonly"/>
 						<input type="hidden" id="page" name="page" value="${scri.page}"> 
 						<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
@@ -143,12 +144,15 @@
                    </div>
                </div>
            </div>
-           
            <div class="text-center mt-3">
 				<button type="submit" class="btn btn-success update_btn">저장</button>
 				<button type="button" class="btn btn-danger cancel_btn">취소</button>
 				<button type="button" class="btn btn-info fileAdd_btn">파일추가</button>	
 		    </div> 
+		    </c:if>
+		    <c:if test="${member.userId == null}">
+				<p style="margin:20px;">로그인 후에 작성하실 수 있습니다.</p>
+			</c:if>	
         </div>
 	</div>
 </body>

@@ -127,6 +127,9 @@
 										<li class="sui-pager-element"><a href="list${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
 									</c:if> 
 								</ul>
+								<div class="sui-pager-info-box" style="padding-top:0;">
+									<button type="button" class="btn btn-primary" onclick="location.href='/board/writeView'">등록</button>
+								</div>
 							</div>
 						</div>
 					</div>

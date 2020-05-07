@@ -11,7 +11,19 @@
 <link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light-bootstrap/all.min.css" />
 <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
 <script type="text/javascript" src="http://www.prepbootstrap.com/Content/js/gridData.js"></script>
-        
+<script type="text/javascript">
+$(document).ready(function(){
+	var pathName = window.location.pathname;
+	
+	$(".navLi").removeClass("active");
+	$("#navUl").children().each(function(){ 
+		if($(this).children("a").attr("href").indexOf(pathName.split("/")[1]) > -1 && pathName != "/"){
+			$(this).addClass("active");
+		}
+	});
+	
+})
+</script>      
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">            
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -23,12 +35,12 @@
                 <a class="navbar-brand" href="/">당직 관리 시스템</a>
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
+                <ul class="nav navbar-nav side-nav" id="navUl">
                     <!-- <li class="active"><a href="#"><i class="fa fa-bullseye"></i> 당직 스케줄</a></li> -->
-                    <li><a href="#"><i class="fa fa-bullseye"></i> 당직 스케줄</a></li>
-                    <li><a href="/board/list"><i class="fa fa-tasks"></i> 당직 체크 문서</a></li>                    
-                    <li><a href="#"><i class="fa fa-globe"></i> 근무 횟수</a></li>
-                    <li><a href="/exception/list"><i class="fa fa-list-ol"></i> 당직 예외 설정</a></li>
+                    <li id="navLi1" class="navLi"><a href="#"><i class="fa fa-bullseye"></i> 당직 스케줄</a></li>
+                    <li id="navLi2" class="navLi"><a href="/board/list"><i class="fa fa-tasks"></i> 당직 체크 문서</a></li>                    
+                    <li id="navLi3" class="navLi"><a href="#"><i class="fa fa-globe"></i> 근무 횟수</a></li>
+                    <li id="navLi4" class="navLi"><a href="/exception/list"><i class="fa fa-list-ol"></i> 당직 예외 설정</a></li>
 					<!-- <li><a href="typography.html"><i class="fa fa-font"></i> Typography</a></li>
                     <li><a href="bootstrap-elements.html"><i class="fa fa-list-ul"></i> Bootstrap Elements</a></li>
                     <li><a href="bootstrap-grid.html"><i class="fa fa-table"></i > Bootstrap Grid</a></li>  -->                   

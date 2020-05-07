@@ -3,32 +3,95 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
-	<!-- 합쳐지고 최소화된 최신 CSS -->
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-	부가적인 테마
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
- 	
- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
- 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
-	
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
- 	
- 	<title>게시판</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 	<title>당직 예외 설정</title>
+ 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 <body>
-<div>
+<div id="wrapper">
 	<%@include file="/WEB-INF/views/nav.jsp" %>
-</div>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<div id="page-wrapper">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+                        <h3 class="panel-title"> 당직 예외 설정</h3>
+                    </div>
+		       	   <c:if test="${member.userId != null}">
+		           <div class="card">
+		               <div class="card-header card-header-primary">
+		                   <h4 class="card-title"><i class="fas fa-square"></i> 당직 예외 설정 수정</h4>
+		                   <p class="card-catagory"></p>
+		               </div>
+		               <div class="card-body">
+		                   <div class="table-responsive">
+		                   		<form name="updateForm" role="form" method="post" action="/exception/update" enctype="multipart/form-data">
+		                   			<input type="hidden" name="eno" value="${update.eno}" readonly="readonly"/>
+									<input type="hidden" id="page" name="page" value="${scri.page}"> 
+									<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
+									<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
+									<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
+									<input type="hidden" id="searchEType" name="searchEType" value="${scri.searchEType}"> 
+									<input type="hidden" id="eTypeKeyword" name="eTypeKeyword" value="${scri.eTypeKeyword}"> 
+			                        <table class="table">
+			                            <tbody>
+				                            <tr style="line-height:32px;">
+				                                <td>구분</td>
+				                                <td colspan="3">
+				                                   <select id="etype" name="etype" onchange="typeSelect();" class="form-control" style="width:150px;">
+														<option value="D"<c:if test="${update.etype == 'D'}"> selected</c:if>>날짜</option>
+														<option value="U"<c:if test="${update.etype == 'U'}"> selected</c:if>>사용자</option>
+													</select>
+				                                </td>                    
+				                            </tr>
+				                            <tr>
+				                                <td>선택값</td>
+				                                <td colspan="3">
+													<input type="text" id="edate" name="edate" class="form-control" title="날짜를 입력하세요." value="${update.edate}" maxlength="10" autocomplete="off"<c:if test="${update.etype != 'D'}"> style="display:none;"</c:if> />
+													<select id="euser" name="euser"  style="<c:if test="${update.etype != 'U'}">display:none; </c:if>width:200px;" class="form-control">
+													</select>
+				                                </td>
+				                            </tr>  
+				                            <tr>
+				                                <td>내용</td>
+				                                <td colspan="3">
+				                                    <input type="text" id="content" name="content" class="chk form-control" title="내용을 입력하세요." value="${update.content}" />
+				                                </td>
+				                            </tr>
+				                            <tr>
+				                                <td>작성자</td>
+				                                <td colspan="3">
+				                                    <input type="text" id="writer" name="writer" class="form-control" title="작성자를 입력하세요." readonly="readonly" value="${update.writer}" readonly="readonly" />
+				                                </td>
+				                            </tr>
+				                            <tr>
+											<tr>
+												<td>작성날짜</td>
+												<td colspan="3">
+													<fmt:formatDate value="${update.regdate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+												</td>					
+											</tr>
+			                            </tbody>
+			                        </table>
+								</form>
+							</div>
+		               </div>
+		           </div>
+		           <div class="text-center mt-3" style="margin-bottom:10px;">
+				        <button type="button" class="btn btn-primary update_btn">수정</button>
+						<button type="button" class="btn btn-default cancel_btn">취소</button>
+				    </div>
+				    </c:if>
+				    <c:if test="${member.userId == null}">
+						<p style="margin:20px;">로그인 후에 작성하실 수 있습니다.</p>
+					</c:if>	  
+				</div>
+			</div>
+		</div>
+	 </div>
+</div>							
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
 	var userID = "${update.euser}";
@@ -129,7 +192,7 @@
 				$("#edate").focus();
 				return true;
 			}
-		} else if(type == "S"){
+		} else if(type == "U"){
 			if($("#euser").val() == ""){
 				alert("사용자를 주세요.");
 				$("#euser").focus();
@@ -148,80 +211,10 @@
 		} else if(type == "U"){
 			$("#euser").show();
 			$("#edate").hide();
+			$("#edate").val("");
 		}
 		
 	}
 </script>
-	<div class="container" style="margin-top:20px;">
-	<header>
-		<h1> 당직 예외 설정</h1>
-	</header>
-	<hr />
-       <div class="col-sm-12 pt-3">
-       	   <c:if test="${member.userId != null}">
-           <div class="card">
-               <div class="card-header card-header-primary">
-                   <h4 class="card-title"><i class="fas fa-square"></i> 당직 예외 설정</h4>
-                   <p class="card-catagory"></p>
-               </div>
-               <div class="card-body">
-                   <div class="table-responsive">
-                   
-                   	<form name="updateForm" role="form" method="post" action="/exception/update" enctype="multipart/form-data">
-                        <table class="table" id="fileIndex">
-                            <tbody>
-	                            <tr style="line-height:32px;">
-	                                <td>구분</td>
-	                                <td colspan="3">
-	                                   <select id="etype" name="etype" onchange="typeSelect();" class="form-control" style="width:60px;">
-											<option value="D"<c:if test="${update.etype == 'D'}"> selected</c:if>>날짜</option>
-											<option value="U"<c:if test="${update.etype == 'U'}"> selected</c:if>>사용자</option>
-										</select>
-	                                </td>                    
-	                            </tr>
-	                            <tr>
-	                                <td>선택값</td>
-	                                <td colspan="3">
-										<input type="text" id="edate" name="edate" title="날짜를 입력하세요." value="${update.edate}" maxlength="10" autocomplete="off"<c:if test="${update.etype != 'D'}"> style="display:none;"</c:if> />
-										<select id="euser" name="euser"  style="<c:if test="${update.etype != 'U'}">display:none; </c:if>width:200px;" class="form-control">
-										</select>
-	                                </td>
-	                            </tr>  
-	                            <tr>
-	                                <td>내용</td>
-	                                <td colspan="3">
-	                                    <input type="text" id="content" name="content" class="chk" title="내용을 입력하세요." value="${update.content}" />
-	                                </td>
-	                            </tr>
-	                            <tr>
-	                                <td>작성자</td>
-	                                <td colspan="3">
-	                                    <input type="text" id="writer" name="writer" title="작성자를 입력하세요." readonly="readonly" value="${update.writer}" readonly="readonly" />
-	                                </td>
-	                            </tr>
-	                            <tr>
-								<tr>
-									<td>작성날짜</td>
-									<td colspan="3">
-										<fmt:formatDate value="${update.regdate}" pattern="yyyy-MM-dd HH:mm:ss"/>
-									</td>					
-								</tr>
-                            </tbody>
-                        </table>
-					</form>          
-                   </div>
-               </div>
-           </div>
-           
-           <div class="text-center mt-3">
-		        <button type="button" class="update_btn">저장</button>
-				<button type="button" class="cancel_btn">취소</button>
-		    </div>
-		    </c:if>
-		    <c:if test="${member.userId == null}">
-					<p>로그인 후에 작성하실 수 있습니다.</p>
-			</c:if>	   
-        </div>
-	</div>
 </body>
 </html>

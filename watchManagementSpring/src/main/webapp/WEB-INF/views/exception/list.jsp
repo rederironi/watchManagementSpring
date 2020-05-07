@@ -18,7 +18,7 @@
                         <h3 class="panel-title"> 당직 예외 설정</h3>
                     </div>
                     <br />
-                    <select id="eTypeSelect" onchange="fn_eTypeSelect();" class="form-control" style="width:200px;">
+                    <select id="eTypeSelect" onchange="fn_eTypeSelect();" class="form-control" style="margin-left:18px;width:200px;">
 						<option value=""<c:out value="${scri.eTypeKeyword eq '' ? 'selected' : ''}"/>>모두</option>
 						<option value="D"<c:out value="${scri.eTypeKeyword eq 'D' ? 'selected' : ''}"/>>날짜</option>
 						<option value="U"<c:out value="${scri.eTypeKeyword eq 'U' ? 'selected' : ''}"/>>사용자</option>
@@ -76,9 +76,9 @@
 										</colgroup>
 										<tbody>
 										<c:forEach items="${list}" var = "list">
-										<tr>
-											<td><c:out value="${list.eno}" /></td>
-											<td>
+										<tr class="sui-row" role="row">
+											<td role="gridcell" tabindex="-1" class="sui-cell"><c:out value="${list.eno}" /></td>
+											<td role="gridcell" tabindex="-1" class="sui-cell">
 												<%-- <a href="/exception/readView?eno=${list.eno}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}"></a> --%>
 												<c:if test="${list.etype == 'D'}">
 													날짜
@@ -87,7 +87,7 @@
 													사용자
 												</c:if>
 											</td>
-											<td>
+											<td role="gridcell" tabindex="-1" class="sui-cell">
 												<c:if test="${list.etype == 'D'}">
 													<c:out value="${list.edate}" />
 												</c:if>
@@ -95,8 +95,8 @@
 													<c:out value="${list.euser}" />
 												</c:if>
 											</td>
-											<td><a href="/exception/readView?eno=${list.eno}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}"><c:out value="${list.content}" /></a></td>
-											<td><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+											<td role="gridcell" tabindex="-1" class="sui-cell"><a href="/exception/readView?eno=${list.eno}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}"><c:out value="${list.content}" /></a></td>
+											<td role="gridcell" tabindex="-1" class="sui-cell"><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 										</tr>
 										</c:forEach>
 										</tbody>
@@ -146,6 +146,9 @@
 										<li class="sui-pager-element"><a href="list${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
 									</c:if> 
 								</ul>
+								<div class="sui-pager-info-box" style="padding-top:0;">
+									<button type="button" class="btn btn-primary" onclick="location.href='/exception/writeView'">등록</button>
+								</div>
 							</div>
 						</div>
 					</div>
