@@ -1,25 +1,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
-
 <html>
 <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Home</title>
-	<!-- 합쳐지고 최소화된 최신 CSS -->
-	<link rel="stylesheet" href="<c:url value="../../resources/css/bootstrap.min.css"/>">
-	<!-- 부가적인 테마 -->
-	<link rel="stylesheet" href="<c:url value="../../resources/css/bootstrap-theme.min.css"/>">
-	
-	<script type="text/javascript" src="<c:url value="../../resources/js/jquery-3.5.0.min.js"/>"></script>
-	<script type="text/javascript" src="<c:url value="../../resources/js/bootstrap.min.js"/>"></script>
- 
 </head>
 <style>
 
 /* BASIC */
 
 html {
-  background-color: #56baed;
+  /* background-color: #56baed; */
 }
 
 body {
@@ -54,7 +47,7 @@ h2 {
   flex-direction: column; 
   /* justify-content: center; */
   width: 100%;
-  min-height: 100%;
+  /* min-height: 100%; */
   padding: 20px;
 }
 
@@ -274,97 +267,55 @@ input[type=text]:placeholder, input[type=password]:placeholder {
     outline: none;
 } 
 </style>
-<a href="/board/list">게시판</a><br />
+<body>
+<div id="wrapper">
+	<%@include file="/WEB-INF/views/nav.jsp" %>
+	<div id="page-wrapper">
+		<div class="row">
+			<div class="col-lg-12">
+				<div id="formContent" style="margin:auto;">
+					<!-- Tabs Titles -->
+					
+					<!-- Icon -->
+					<div class="fadeIn first">
+					  Login
+					</div>
+					<form name='homeForm' method="post" action="/member/login">
+					<c:if test="${member == null}">
+						<input type="text" id="userId" class="fadeIn second" name="userId" placeholder="ID">
+						<input type="password" id="userPass" class="fadeIn third" name="userPass" placeholder="Password">
+						<input type="submit" class="fadeIn fourth" value="Log In">
+						<input type="button" id="registerBtn" class="fadeIn fourth" value="회원가입">
+					</c:if>
+					<c:if test="${member != null }">
+						<div>
+							<p>${member.userId}님 환영 합니다.</p>
+							<button id="memberUpdateBtn" type="button">회원정보수정</button>
+							<button id="logoutBtn" type="button">로그아웃</button>
+						</div>
+					</c:if>
+					<c:if test="${msg == false}">
+						<p style="color: red;">로그인 실패! 아이디와 비밀번호 확인해주세요.</p>
+					</c:if>
+					</form>
+				</div>
+			</div>
+		</div>
+	 </div>
+</div>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#logoutBtn").on("click", function(){
-			location.href="member/logout";
+			location.href="/member/logout";
 		})
 		$("#registerBtn").on("click", function(){
-			location.href="member/register";
+			location.href="/member/register";
 		})
-		
-		
-		
 		$("#memberUpdateBtn").on("click", function(){
-			location.href="member/memberUpdateView";
+			location.href="/member/memberUpdateView";
 		})
 		
 	})
 </script>
-<body>
-<div class="wrapper fadeInDown">
-  <div id="formContent">
-    <!-- Tabs Titles -->
-
-    <!-- Icon -->
-    <div class="fadeIn first">
-      Login
-    </div>
-
-    <!-- Login Form -->
-   <!--  <form>
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-      <input type="submit" class="fadeIn fourth" value="Log In">
-    </form> -->
-    
-    <form name='homeForm' method="post" action="/member/login">
-		<c:if test="${member == null}">
-				<input type="text" id="userId" class="fadeIn second" name="userId" placeholder="ID">
-				<input type="password" id="userPass" class="fadeIn third" name="userPass" placeholder="Password">
-				<input type="submit" class="fadeIn fourth" value="Log In">
-				<input type="button" id="registerBtn" class="fadeIn fourth" value="회원가입">
-			<!-- <div>
-				<button type="submit">로그인</button>
-				<button id="registerBtn" type="button">회원가입</button>
-			</div> -->
-		</c:if>
-		<c:if test="${member != null }">
-			<div>
-				<p>${member.userId}님 환영 합니다.</p>
-				<button id="memberUpdateBtn" type="button">회원정보수정</button>
-				<button id="logoutBtn" type="button">로그아웃</button>
-			</div>
-		</c:if>
-		<c:if test="${msg == false}">
-			<p style="color: red;">로그인 실패! 아이디와 비밀번호 확인해주세요.</p>
-		</c:if>
-	</form>
-
-    <!-- Remind Passowrd -->
-    <!-- <div id="formFooter">
-      <a class="underlineHover" href="#">Forgot Password?</a>
-    </div> -->
-
-  </div>
-</div>
-
-<%-- 	<form name='homeForm' method="post" action="/member/login">
-		<c:if test="${member == null}">
-			<div>
-				<label for="userId"></label>
-				<input type="text" id="userId" name="userId">
-			</div>
-			<div>
-				<label for="userPass"></label>
-				<input type="password" id="userPass" name="userPass">
-			</div>
-			<div>
-				<button type="submit">로그인</button>
-				<button id="registerBtn" type="button">회원가입</button>
-			</div>
-		</c:if>
-		<c:if test="${member != null }">
-			<div>
-				<p>${member.userId}님 환영 합니다.</p>
-				<button id="memberUpdateBtn" type="button">회원정보수정</button>
-				<button id="logoutBtn" type="button">로그아웃</button>
-			</div>
-		</c:if>
-		<c:if test="${msg == false}">
-			<p style="color: red;">로그인 실패! 아이디와 비밀번호 확인해주세요.</p>
-		</c:if>
-	</form> --%>
 </body>
 </html>
