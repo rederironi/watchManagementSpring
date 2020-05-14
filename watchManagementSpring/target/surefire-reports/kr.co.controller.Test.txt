@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: kr.co.controller.Test
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.124 sec <<< FAILURE! - in kr.co.controller.Test
+initializationError(kr.co.controller.Test)  Time elapsed: 0.004 sec  <<< ERROR!
+java.lang.ExceptionInInitializerError
+Caused by: java.lang.IllegalStateException: SpringJUnit4ClassRunner requires JUnit 4.12 or higher.
+
